@@ -23,4 +23,10 @@ public class GroupTest {
         Study study = new Study(5);
         assertThat(study.getLimit()).isLessThan(10);
     }
+
+    @FastTest
+    @DisplayName("커스텀 태그 테스트")
+    void customTag() {
+        assertThat(new Study(5).getLimit()).isEqualTo(5);
+    }
 }
