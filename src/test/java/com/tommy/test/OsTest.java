@@ -1,5 +1,6 @@
 package com.tommy.test;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.*;
@@ -12,6 +13,7 @@ public class OsTest {
 
     @Test
     @DisplayName("환경 변수가 Local 일 경우 테스트 진행")
+    @Disabled
     void environmentPath() {
         // assumeTrue 로 조건을 준 후 테스트를 진행할 수 있다.
         String environment = System.getenv("TEST_ENV");
