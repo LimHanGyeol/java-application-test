@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * 테스트 메서드 네이밍에 대한 전략 구현체를 정의한다.
  * ReplaceUnderscores 는 언더 스코어를 빈 문자로 치환해준다.
  * 테스트 메서드 네이밍은 상황에 따라 달라질 경우가 있으므로 @DisplayName 을 권장한다.
+ * 게다가 DisplayNameGeneration 보다 DisplayName 이 우선순위가 더 높다.
  */
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class StudyTest {
