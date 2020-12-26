@@ -9,8 +9,9 @@ public class Study {
     private final int limit;
     private String name;
     private final StudyStatus status;
-    private Member owner;
     private LocalDateTime createdDateTime;
+
+    private Member owner;
 
     public Study(String name, int limit) {
         if (limit < 0) {
