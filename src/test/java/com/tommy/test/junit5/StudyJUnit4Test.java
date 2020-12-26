@@ -1,4 +1,4 @@
-package com.tommy.test;
+package com.tommy.test.junit5;
 
 import org.junit.Before;
 import org.junit.Test;

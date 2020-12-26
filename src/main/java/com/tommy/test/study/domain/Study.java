@@ -1,10 +1,16 @@
-package com.tommy.test;
+package com.tommy.test.study.domain;
+
+import com.tommy.test.member.domain.Member;
+
+import java.time.LocalDateTime;
 
 public class Study {
 
     private final int limit;
     private String name;
     private final StudyStatus status;
+    private Member owner;
+    private LocalDateTime createdDateTime;
 
     public Study(String name, int limit) {
         if (limit < 0) {
@@ -33,6 +39,18 @@ public class Study {
 
     public StudyStatus getStatus() {
         return status;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public Member getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Member owner) {
+        this.owner = owner;
     }
 
     @Override

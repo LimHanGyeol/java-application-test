@@ -1,7 +1,7 @@
-package com.tommy.test;
+package com.tommy.test.junit5;
 
+import com.tommy.test.study.domain.Study;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

@@ -1,5 +1,6 @@
-package com.tommy.test;
+package com.tommy.test.junit5;
 
+import com.tommy.test.study.domain.Study;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

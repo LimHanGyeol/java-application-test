@@ -1,4 +1,4 @@
-package com.tommy.test;
+package com.tommy.test.junit5;
 
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
@@ -8,10 +8,10 @@ import java.lang.reflect.Method;
 
 public class FindSlowTestExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
-    private long THRESHOLD;
+    private final long threshold;
 
-    public FindSlowTestExtension(long THRESHOLD) {
-        this.THRESHOLD = THRESHOLD;
+    public FindSlowTestExtension(long threshold) {
+        this.threshold = threshold;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class FindSlowTestExtension implements BeforeTestExecutionCallback, After
         long startTime = store.remove("START_TIME", long.class);
         long duration = System.currentTimeMillis() - startTime;
 
-        if (duration > THRESHOLD && annotation == null) {
+        if (duration > threshold && annotation == null) {
             System.out.printf("Please consider mark method [%s] with @SlowTest.\n", testMethodName);
         }
     }
