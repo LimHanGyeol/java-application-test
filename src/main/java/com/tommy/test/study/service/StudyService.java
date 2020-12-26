@@ -23,8 +23,10 @@ public class StudyService {
     public Study createNewStudy(Long memberId, Study study) {
         Member member = Optional.ofNullable(memberService.findById(memberId))
                 .orElseThrow(() -> new IllegalArgumentException("Member doesn't exist for id : " + memberId));
-
         study.setOwner(member);
-        return studyRepository.save(study);
+
+        Study newStudy = studyRepository.save(study);
+        memberService.notify(newStudy);
+        return newStudy;
     }
 }
