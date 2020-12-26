@@ -29,6 +29,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Spring Boot 2.4 Release 에서 JUnit4 의존성이 Removed 되었다. -->
+        <!-- 추가를 하려면 아래의 dependency 를 추가해 주어야 한다. -->
+        <!-- 출처 : https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.4-Release-Notes -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>
