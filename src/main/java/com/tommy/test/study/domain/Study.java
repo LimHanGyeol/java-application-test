@@ -6,28 +6,37 @@ import java.time.LocalDateTime;
 
 public class Study {
 
+    private static final String INVALID_STUDY_LIMIT = "limit 은 0보다 커야 한다.";
+
     private final int limit;
     private String name;
-    private final StudyStatus status;
-    private LocalDateTime createdDateTime;
+    private StudyStatus status;
+    private LocalDateTime openedDateTime;
 
     private Member owner;
 
     public Study(String name, int limit) {
-        if (limit < 0) {
-            throw new IllegalArgumentException("limit 은 0보다 커야 한다.");
-        }
+        validateStudyLimit(limit);
         this.name = name;
         this.status = StudyStatus.DRAFT;
         this.limit = limit;
     }
 
     public Study(int limit) {
-        if (limit < 0) {
-            throw new IllegalArgumentException("limit 은 0보다 커야 한다.");
-        }
+        validateStudyLimit(limit);
         this.status = StudyStatus.DRAFT;
         this.limit = limit;
+    }
+
+    public void open() {
+        this.status = StudyStatus.OPENED;
+        this.openedDateTime = LocalDateTime.now();
+    }
+
+    private void validateStudyLimit(int limit) {
+        if (limit < 0) {
+            throw new IllegalArgumentException(INVALID_STUDY_LIMIT);
+        }
     }
 
     public String getName() {
@@ -42,8 +51,8 @@ public class Study {
         return status;
     }
 
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
+    public LocalDateTime getOpenedDateTime() {
+        return openedDateTime;
     }
 
     public Member getOwner() {
@@ -60,7 +69,7 @@ public class Study {
                 "limit=" + limit +
                 ", name='" + name + '\'' +
                 ", status=" + status +
-                ", createdDateTime=" + createdDateTime +
+                ", createdDateTime=" + openedDateTime +
                 ", owner=" + owner +
                 '}';
     }

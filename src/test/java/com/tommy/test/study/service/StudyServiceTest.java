@@ -5,6 +5,7 @@ import com.tommy.test.member.exception.MemberNotFoundException;
 import com.tommy.test.member.service.MemberService;
 import com.tommy.test.study.domain.Study;
 import com.tommy.test.study.domain.StudyRepository;
+import com.tommy.test.study.domain.StudyStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class StudyServiceTest {
     @Test
     @DisplayName("새로운 스터디 생성")
     void createNewStudy() {
-        // Given 주어진 상황
+        // given 주어진 상황
         Member member = new Member(1L, "hangyeol@email.com");
         Study study = new Study("Java", 10);
 
@@ -49,10 +50,10 @@ class StudyServiceTest {
         given(memberService.findById(1L)).willReturn(member);
         given(studyRepository.save(study)).willReturn(study);
 
-        // When 무엇인가를 할 때
-        Study newStudy = studyService.createNewStudy(1L, study);
+        // when 무엇인가를 할 때
+        Study newStudy = studyService.create(1L, study);
 
-        // Then 이럴 것 이다.
+        // then 이럴 것 이다.
         assertThat(newStudy).isEqualTo(study);
         then(memberService).should(times(1)).notify(study);
         then(memberService).shouldHaveNoMoreInteractions();
@@ -90,6 +91,24 @@ class StudyServiceTest {
                 .isThrownBy(() -> {
                     memberService.findById(1L);
                 });
+    }
+
+    @Test
+    @DisplayName("다른 사람이 볼 수 있도록 스터디를 공개한다.")
+    void openStudy() {
+        // given
+        Study study = new Study("Spring", 15);
+        assertThat(study.getOpenedDateTime()).isNull();
+
+        given(studyRepository.save(study)).willReturn(study);
+
+        // when
+        studyService.open(study);
+
+        // then
+        assertThat(study.getStatus()).isEqualTo(StudyStatus.OPENED);
+        assertThat(study.getOpenedDateTime()).isNotNull();
+        then(memberService).should().notify(study);
     }
 
 }

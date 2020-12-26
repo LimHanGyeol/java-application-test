@@ -20,7 +20,7 @@ public class StudyService {
         this.studyRepository = studyRepository;
     }
 
-    public Study createNewStudy(Long memberId, Study study) {
+    public Study create(Long memberId, Study study) {
         Member member = Optional.ofNullable(memberService.findById(memberId))
                 .orElseThrow(() -> new IllegalArgumentException("Member doesn't exist for id : " + memberId));
         study.setOwner(member);
@@ -28,5 +28,12 @@ public class StudyService {
         Study newStudy = studyRepository.save(study);
         memberService.notify(newStudy);
         return newStudy;
+    }
+
+    public Study open(Study study) {
+        study.open();
+        Study openedStudy = studyRepository.save(study);
+        memberService.notify(openedStudy);
+        return openedStudy;
     }
 }
