@@ -60,6 +60,8 @@ public class Study {
                 "limit=" + limit +
                 ", name='" + name + '\'' +
                 ", status=" + status +
+                ", createdDateTime=" + createdDateTime +
+                ", owner=" + owner +
                 '}';
     }
 }

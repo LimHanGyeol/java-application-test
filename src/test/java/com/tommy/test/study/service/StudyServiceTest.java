@@ -5,6 +5,7 @@ import com.tommy.test.member.exception.MemberNotFoundException;
 import com.tommy.test.member.service.MemberService;
 import com.tommy.test.study.domain.Study;
 import com.tommy.test.study.domain.StudyRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,22 +28,21 @@ class StudyServiceTest {
 
     private StudyService studyService;
 
-    @Test
-    @DisplayName("스터디 서비스 생성")
-    void createStudy() {
+    @BeforeEach
+    void setUp() {
         studyService = new StudyService(memberService, studyRepository);
-        assertThat(studyService).isNotNull();
     }
 
     @Test
     @DisplayName("새로운 스터디 생성")
     void createNewStudy() {
         Member member = new Member(1L, "hangyeol@email.com");
+        Study study = new Study("Java", 10);
 
         when(memberService.findById(1L)).thenReturn(member);
+        when(studyService.createNewStudy(1L, study)).thenReturn(study);
 
-        Study study = new Study("Java", 10);
-        studyService.createNewStudy(1L, study);
+        assertThat(studyService.createNewStudy(1L, study)).isEqualTo(study);
     }
 
     @Test
@@ -72,4 +72,5 @@ class StudyServiceTest {
                     memberService.findById(1L);
                 });
     }
+
 }
